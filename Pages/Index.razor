@@ -1,0 +1,77 @@
+﻿@page "/"
+@using Syncfusion.Blazor.Inputs
+@using Syncfusion.Blazor.Buttons
+@using System.IO
+
+
+<div class="col-lg-12 control-section">
+            <div class="control-wrapper">
+                <div class="col-lg-6 drop-area-wrap">
+                    <div class="font-icons">
+                        <span> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADQAAAA0CAYAAADFeBvrAAAACXBIWXMAAAsTAAALEwEAmpwYAAADcElEQVR4nO2ZS2gUQRCGBxMfUbwowZOKB59RfHsR9exVst6EEHSjJNP/37PmKHMQwYPGR7wIHjwrgkjA192TGCQqAS+a3HyAiaKRqCtFZrHT7GN2dmZ2DFtQl9na6v6mqrurehynTiHZRfIKgFcAvpEsNqhTAO4qpTY6aYrv+0tIDpP8FQNEOZ0heTY1GABPEwKZpwBu+r7fnigQ5yKTOIwBdV9eopMQTFeZNJsk2T04OLgyql/f95fJ2qkCNeK67tIkgK7YMFrrVXH49jxvd41IjcSefiRfWwN1x+W7UCisCJGCw06cAmDaHKCRNLPF9/1FIdfVcC6Xa4tlUNt5LE6r+E98TTEjQJzTRw1DZQyoGGzp7QsGiHN6K7YBMwJU1FoXsgr0JwoQgB+RCtoUgMajRonkncwBKaX2A3hI8nklBfCuXJUP4EvmgMJKPp9fDuBqw/PJCpCIVCkLCkikBWRLK0IJC2stAQBHgw602GSdlLk0DMRswJTOlYk4gIqmaq13li4opFT3PG8LgF6Sbyy7DtOPtOUk95E8R/KD5XdcmrkKEzxUzy7KeoEqOZKSXfqRMAO7rtspF5GG39FKtgB2pQLU39+/muSJQqGwvvRMa32gnB2AHpIHzSgopbYb5cqoeeIrpfaWlOTpVIDw7809M4A6qtjJGnhg+jYuJ0crRSRshsQGBOC28WxzNSBRiYzh27eBPM/bZBWeH1NLOQDH5ELQmPyZWkCyMRi/9YVYQ71N2RRc1+0k+b4W0MDAwAbDtw4B1JMaUC6Xa1NKrSN5MuhJqq01Sc+f5p00yWs2ULDZ5A29lxoQQyxeC+iG+X8AbzOzKYiEGdjzvLUArgM4lc/nF5eekzxu2P8/QOVEqg0AnzMB5AeHY617Z7v0Cezl08tFAN8t+5fGeHuSBpq0jMaCM2Je7VZGp+TNB2eJrJWvlWwB/AbwIrCdSLQ4xUJrHxJ3ELOwBWRJK0IJC1spt9BTDtZHY6m6nSaJUmqNdW5N1+3EuhsQJ31Ok4RWuy5FQN1OAAxZTj5prXc4KYvrutus+lBe7qVIjsp8m5kBcAHAYfPCIwnVWh8hed5OfQCzcsUW6e0YjVpmFMCQE1WkzyH5JEMwj83eKzKUfEGTUDcRZFYi0zCMKcGauhy0GRVbhhhVxhiTDQDA1loT/AuJMLpCSTGu7QAAAABJRU5ErkJggg=="></span>
+                        <span> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADQAAAA0CAYAAADFeBvrAAAACXBIWXMAAAsTAAALEwEAmpwYAAADZ0lEQVR4nO2aPWgUQRTHNyZ+oUaIhYVaKIgfaaIWgtiola3mKkFQ5IhJdv//2UuIhbBEMJUmSmwCiiAIooVCgviB2GqjRVT8IoJBLESM0SKY6MmQWZiMex97t3u3HvfgFTc3+9789r03OzO7lhVSSLaSHALwAsBPktky9TuAW47jbLYqKZ7nLSE5THIuAoggnSHZUzEYAA9jAlmgAEY8z2uKFYjzkYkdRoO6I2+iFRNMa0CaTZJs7+3tXVWqXc/zlsnayQM1Ztv20jiAhkwYIURLRLZ3FojUWOTpR/Kl4ag9KtudnZ0ri0jBYStKATCtOygnzUzxPG9RkXU1nEqlGiNxahqPxGge+7HXFBMCxHm9VzZUwoCyakpvqhkgzuvlyBwmBCgrhMjUFBDJGQBbEgcE4HMZUDeTCJQqFQrAVOKAipFMJrMCwG6Sd8seTxKAfHEcZ21NAUmpA5lSj1DMwkIlAOCg2oFmq6yTcixlAzEZMP5z5WMUQFlDB0imc+gnzfklAK7/HwAHwHWSvwIG+oxkB8n9juPsBXCU5GgQVORAANryGHteyDHJTQrAt3fGsqwGs5/rulsrDuQ4zi5dAbwzDXV1da0RQhxzXXeH3wZgm+r3Wm6zVXODXEx2d3dvTKfTi0meqjgQ8+S7Nvg21Tbnuu4G7doJkje03/2ajymS3yoOBGDEV5JX8gHJwxQZLa1dLjhf+RFSy5YBAF+KuVGxAJkSZEhCkDyiR0dLOan9AQvN0wBmqwqUSqUai3EshFhO8rFh97Zt29v1fgCOJ7KGpKhJ44Aq9PdB/QH8BvDItu312iTxNZFAzN3vj3rezPi/hRD7tOueVLWGAFwLCTThp6F8oSWEWKdd1kDyQ7UnhashgUbz2OqpVA2dzbX0AfBU69uh2k7mAlJ1M0byhEw127b3qGXPP1vpKIEm89XKf7c4Ra1tH2I3ELGwDmRIPUIxC+spV+sphxhfGoeVvr6+1cZzazq0EfmRkmHkkFUlcRznsBGh8dBGAAwaQG+i+vAijAghWki+NcZyLrQhuTEL+jRGvtexbbs5ltEv9N+sImPCzMqTo5KMkryYgKVR1gAaLPkuqWOnBwmCuS/HVDKQDwXgQq7DjQqBzMrIlA2ji6qp83KGIfmjAiDSx7icAORpUqEB/gWsztSEXAspLgAAAABJRU5ErkJggg=="></span>
+                        <span> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADQAAAA0CAYAAADFeBvrAAAACXBIWXMAAAsTAAALEwEAmpwYAAAD6UlEQVR4nO2aT2gcVRzHN1YNtGoKoX8urQrqQVrQU4SWUvHQ1lKwSDx4EE9ryOa97/fNJOyhlKEtlLQgpL0JtvXQHNuL4EWvvRVRA0FQkCQGUWwT00bbJnblR2bqy3Nnd3ZnZjuG/cEPdt+8+b3f5/3ev/nNlEotitb6ZZLnAXwHYIlkLY0CWARw1fO8XaVOyuDg4CaS4yQfpIWIAVsC8EHHYABczwPE0YckT+YORPJMm72+QvJ2PQVwt8F9E6VSqScXGAAvkLznNPgDyaO+729p124QBE8CmOw4FMnAaez74eHhZ7KwDeC1JhGeyByK5A27Ea31W1nZlggnGLafBEHwRFZtSi/OWg08yNK42Eo4Hy9l1i7JBcvwQiZG19uvdRSKxQGqAbicGqpIQFzTT1MtFAUEqsmJZaMB1UiWNxrQ8sjIyItFBJprFwrAZOGAABxx9rpWdKFwQElPFAAGSH7hQv0vgSIZHR3duaGARLpArnQj9LiHnNb67TR7QY46J0t6y0ANYO6QnCe5GrOpLVk5godW+V9h2R8JNsZfSE6T/C3m+mw7QOsqGGNeUkr1RtfL5fJTnue9TvJzu55kgiwbp6JyrfW7UXlM3k7yE+OSq7D9UEptA3CxmcNsFajUOC/3Vb161Wq1D8CtsFffiVnyRZe11vvj2gBQzQ1IKdUrDQA4EJVJPiHOEIATCYDWnZC11nsADIbHn60kr+UGhLUGxME/Zdi5O7VrZ2xs7FmSv8cBAfhZUleW/QlnvtwH8HfuQCR/jJ4QjTF7Gw1NiZL0eEyErlj1BqyF52akAL7JDSgIgqeNMe/LZLUc+dCtZ4x5o1wub5bflUql3xhzPAboUYqXpAqj8lmdTlnsyKKglNom0aoDdBiAjv5HcC6QzEfLae1GLaYTalkC9UiUtNa7SQ65+5WzUMxI3SbOXbDK94Vl0wLq+/723IHw7xyqq1a9g2HZUCMgmR/2NTuvLSnhIgLNuFFynTPGvGld7pF7AXwkc6+IQDU3SnX2oZ9kCP/HiQb3lNICRccerfWORkBRPQCHrPKZaFEITxZ33PsA/CqrnOxpkQ+SDfU87xVZLMJ3SqmA5ho5nrNKNOZdiFSHU6TLuuSm4pMx5nDLQM2k+8Sas7AbIUe6Qy5nYXfINXlpbOcSOi3VarXPWdqXUr/Wl6NOLt4m8+U9Z8hNpf7wAsDXWX140YpUKpX+Oqeaj1s25Pv+8+6nMeGD3rFOgCmlngsj48KsKqVebcsogNMFPBpNtN1Lchru0OdlSWG+jDJRbUv4OHA2rw8AE4KsSGRSw9giqWIA50h+myR/nYHKM9WULABJ5sw/xDTurez5DjIAAAAASUVORK5CYII="></span>
+                    </div>
+                    <span class="drop-text">Drop files here to upload</span>
+                </div>
+                <div class="col-lg-6 drop-area">
+                    <SfUploader @ref="UploadObj"
+                        AllowMultiple="true"
+                        ID="UploadFiles" 
+                        DropArea=".drop-area-wrap" 
+                        ShowFileList="true" 
+                        MaxFileSize=500000000 
+                        AutoUpload="SetAutoUpload"
+                        SequentialUpload="SetSequentialUpload">
+
+                        <UploaderAsyncSettings 
+                            SaveUrl="api/UploadAzure/Upload">
+                        </UploaderAsyncSettings>
+
+                        <UploaderEvents 
+                            BeforeUpload="@BeforeUploadHandler">
+                        </UploaderEvents>
+                    </SfUploader>
+                </div>
+            </div>
+</div>
+<link href="styles/uploader/drop-area.css" rel="stylesheet" />
+
+@code {
+    
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public string folder { get; set; } = "default";
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public string subfolder { get; set; } = "default";
+
+
+    private void BeforeUploadHandler(BeforeUploadEventArgs args)
+    {
+        args.CurrentRequest = new List<object> { new { container = folder }, new { subcontainer = subfolder } };
+    }
+
+    SfUploader UploadObj;
+
+    private bool SetAutoUpload { get; set; } = false;
+    private bool SetSequentialUpload { get; set; } = true;
+
+    public void OnFileRemove(RemovingEventArgs args)
+    {
+        args.PostRawFile = false;
+    }
+
+    public void OnAutoChange(Syncfusion.Blazor.Buttons.ChangeEventArgs<bool> args)
+    {
+        this.UploadObj.ClearAllAsync();
+        this.SetAutoUpload = args.Checked;
+    }
+
+    public void OnSequentialChange(Syncfusion.Blazor.Buttons.ChangeEventArgs<bool> args)
+    {
+        this.UploadObj.ClearAllAsync();
+        this.SetSequentialUpload = args.Checked;
+    }
+}
